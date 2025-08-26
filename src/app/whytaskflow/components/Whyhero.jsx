@@ -7,7 +7,7 @@ export default function WhyHero() {
 
       <div className="relative max-w-6xl mx-auto text-center space-y-12">
         {/* Title */}
-        <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+        <h1 className="text-5xl font-extrabold text-gray-900 leading-tight">
           Why Teams Trust <span className="bg-blue-600 px-2 text-white rounded-2xl">TaskFlow</span>
         </h1>
 

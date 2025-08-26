@@ -15,19 +15,19 @@ export default function Navbar() {
             <img src="/logo.svg" alt="" className="w-10" />
           </div>
           <div className="flex flex-row gap-20 text-gray-700 font-medium">
-            <Link href="">Why TaskFlow</Link>
-            <Link href="">Platform</Link>
-            <Link href="">Contact</Link>
+            <Link href="/whytaskflow">Why TaskFlow</Link>
+            <Link href="/platform">Platform</Link>
+            <Link href="/contact">Contact</Link>
           </div>
           <div className="flex flex-row gap-10 items-center">
-            <Link href="" className="text-black ">
+            <Link href="/login" className="text-black ">
               Log in
             </Link>
             <div
               className="px-5 py-2 rounded-xl"
               style={{ backgroundColor: "#3B82F6" }}
             >
-              <Link href="" className="font-semibold ">
+              <Link href="/register" className="font-semibold ">
                 Start for free
               </Link>
             </div>
@@ -57,19 +57,19 @@ export default function Navbar() {
           {isOpen && (
             <div className="flex flex-col gap-2 pb-2 text-gray-500 font-semibold">
               <Link
-                href=""
+                href="/whytaskflow"
                 className="hover:bg-blue-500 hover:text-white rounded px-2"
               >
                 Why TaksFlow
               </Link>
               <Link
-                href=""
+                href="/platform"
                 className="hover:bg-blue-600 hover:text-white rounded px-2"
               >
                 Platform
               </Link>
               <Link
-                href=""
+                href="/contact"
                 className="hover:bg-blue-600 hover:text-white rounded px-2"
               >
                 Contact
@@ -77,13 +77,13 @@ export default function Navbar() {
               <hr className="border-t-2 border-gray-300 my-1" />
               <div className="flex flex-row max-w-xs mx-auto items-center gap-10">
                 <Link
-                  href=""
+                  href="/login"
                   className="text-gray-500 rounded px-12 py-2 bg-gray-200"
                 >
                   Log in
                 </Link>
                 <Link
-                  href=""
+                  href="/register"
                   className="text-white rounded px-5 py-2"
                   style={{ backgroundColor: "#3B82F6" }}
                 >

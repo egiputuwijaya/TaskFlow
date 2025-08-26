@@ -1,7 +1,7 @@
 export default function WhyValue() {
   return (
     <div className="bg-white px-30 py-10">
-      <h1 className="text-5xl font-semibold text-center text-black ">
+      <h1 className="text-4xl font-semibold text-center text-black ">
         The{" "}
         <span className="bg-blue-600 px-2 py-1 rounded-xl text-white">
           TaskFlow

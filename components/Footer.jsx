@@ -29,13 +29,13 @@ export default function Footer() {
             <div className="hidden md:block">
               <div className="flex flex-col gap-3">
                 <h2 className="font-semibold">MENU</h2>
-                <Link href="" className="text-sm">
+                <Link href="/whytaskflow" className="text-sm">
                   Why TaskFlow
                 </Link>
-                <Link href="" className="text-sm">
+                <Link href="/platform" className="text-sm">
                   Platform
                 </Link>
-                <Link href="" className="text-sm">
+                <Link href="/contact" className="text-sm">
                   Contact
                 </Link>
               </div>
