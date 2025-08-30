@@ -1,4 +1,5 @@
 "use client";
+import * as motion from "motion/react-client";
 
 export default function Statistic() {
   const stats = [
@@ -26,7 +27,13 @@ export default function Statistic() {
 
   return (
     <div className="bg-white px-3 md:px-30 py-20 overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.9 }}
+        className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+      >
         {/* Kiri: Teks */}
         <div>
           <h1 className="font-bold text-4xl text-black leading-snug text-center md:text-left">
@@ -75,7 +82,7 @@ export default function Statistic() {
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -2,18 +2,27 @@
 import Link from "next/link";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import * as motion from "motion/react-client";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="bg-white px-3 md:px-10">
       {/* TAMPILAN DEKSTOP  */}
-      <div className="hidden md:block">
+      <motion.div
+        initial={{ opacity: 0, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.7 }}
+        className="hidden md:block"
+      >
         <div className="flex flex-row justify-between items-center py-3 ">
-          <div className="flex flex-row items-center gap-3">
-            <h1 className="text-black font-semibold text-3xl">TaskFlow</h1>
-            <img src="/logo.svg" alt="" className="w-10" />
-          </div>
+          <Link href="/">
+            <div className="flex flex-row items-center gap-3">
+              <h1 className="text-black font-semibold text-3xl">TaskFlow</h1>
+              <img src="/logo.svg" alt="" className="w-10" />
+            </div>
+          </Link>
           <div className="flex flex-row gap-20 text-gray-700 font-medium">
             <Link href="/whytaskflow">Why TaskFlow</Link>
             <Link href="/platform">Platform</Link>
@@ -33,7 +42,7 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* TAMPILAN MOBILE  */}
       <div className="block md:hidden">

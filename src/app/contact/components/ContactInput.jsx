@@ -56,7 +56,7 @@ export default function ContactInput() {
               <form action="">
                 <div className="flex flex-col gap-5">
                   <div className="flex flex-row justify-around">
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-5 ">
                       <div className="flex flex-col">
                         <p>Inquiry Purpose</p>
                         <input
