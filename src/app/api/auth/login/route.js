@@ -30,6 +30,15 @@ export async function POST(req) {
       expiresIn: process.env.JWT_EXPIRES,
     });
 
+    // RESPONSE JSON
+    const response = NextResponse.json(
+      {
+        message: "Login successfull",
+        user: { id: user.id, email: user.email },
+      },
+      { status: 200 }
+    );
+
     // SIMPAN JWT PADA COOKIE
     response.cookies.set("token", token, {
       httpOnly: true,
@@ -39,13 +48,9 @@ export async function POST(req) {
       maxAge: 60 * 60,
     });
 
-    return NextResponse.json({
-      message: "Login successfull",
-      user: { id: user.id, email: user.email },
-      token,
-    });
-  } catch (eror) {
-    console.log(eror);
+    return response;
+  } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [email, setEMail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMassage] = useState(null);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +18,14 @@ export default function Login() {
     });
     const data = await res.json();
     setMassage(data.message || data.error);
+
+    if (res.ok) {
+      router.push("/dashboard");
+    } else {
+      alert(data.error);
+    }
   };
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-white">
       {/* BAGIAN KIRI */}
