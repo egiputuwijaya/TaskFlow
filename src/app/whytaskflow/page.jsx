@@ -1,5 +1,5 @@
-import Footer from "../../../components/Footer";
-import Navbar from "../../../components/Navbar";
+import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar";
 import WhyDifferent from "./components/Whydifferent";
 import WhyFAQ from "./components/WhyFAQ";
 import WhyHero from "./components/Whyhero";
@@ -14,7 +14,7 @@ export default function WhyTaskFlow() {
       <WhyValue />
       <WhySupport />
       <WhyDifferent />
-      <WhyFAQ/>
+      <WhyFAQ />
       <Footer />
     </div>
   );

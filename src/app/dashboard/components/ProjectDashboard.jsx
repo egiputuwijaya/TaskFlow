@@ -1,8 +1,13 @@
-export default function ProjectDashboard() {
+import Sidebar from "../../../components/Sidebar";
+
+export default function DashboardLayout({ children }) {
   return (
-    <div className="flex-1 p-8 bg-gray-50">
-      <h1 className="text-3xl font-bold mb-4">Welcome Back!</h1>
-      <p className="text-gray-600">This is the main dashboard content area.</p>
+    <div className="flex min-h-screen bg-gray-100">
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Konten utama */}
+      <main className="flex-1 p-8 overflow-auto">{children}</main>
     </div>
   );
 }

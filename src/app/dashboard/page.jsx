@@ -1,11 +1,14 @@
-import Sidebar from "../../../components/Sidebar";
-import ProjectDashboard from "./components/ProjectDashboard";
+import DashboardLayout from "@/components/DashboardLayout";
+import HeroDashboard from "./components/HeroDashboard";
+import StatisticDashboard from "./components/StatisticDashboard";
 
-export default function Dashboard() {
+export default function DashboardPage() {
   return (
-    <div className="flex min-h-screen">
-      <Sidebar />
-      <ProjectDashboard />
-    </div>
+    <DashboardLayout>
+      <div className="">
+        <HeroDashboard />
+        <StatisticDashboard />
+      </div>
+    </DashboardLayout>
   );
 }
