@@ -32,7 +32,7 @@ export default function DashboardLayout({ children }) {
       <div className="hidden md:block">
         <aside
           style={{ width: `${width}px` }}
-          className="bg-white text-gray-600 p-6 flex-shrink-0 relative h-screen"
+          className="fixed top-0 left-0 h-screen bg-white text-gray-600 p-6 flex-shrink-0"
         >
           <div className="flex flex-col gap-5">
             <Link href="/">
@@ -218,7 +218,12 @@ export default function DashboardLayout({ children }) {
       </aside>
 
       {/* MAIN CONTENT */}
-      <main className="flex-1 p-3 overflow-auto">{children}</main>
+      <main
+        className="flex-1 p-3 overflow-auto"
+        style={{ marginLeft: `${width}px` }}
+      >
+        {children}
+      </main>
     </div>
   );
 }
