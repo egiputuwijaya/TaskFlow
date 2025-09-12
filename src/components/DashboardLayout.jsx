@@ -116,10 +116,16 @@ export default function DashboardLayout({ children }) {
       </div>
 
       {/* MOBILE TOGGLE BUTTON */}
-      <div className="md:hidden p-4">
-        <button onClick={() => setIsOpen(true)}>
-          <FaBars className="text-2xl text-gray-800" />
-        </button>
+      <div className="md:hidden fixed top-0 left-0 w-full h-14 bg-white flex items-center px-4 shadow z-40">
+        <div className="flex flex-row gap-3">
+          <button onClick={() => setIsOpen(true)}>
+            <FaBars className="text-2xl text-gray-800" />
+          </button>
+          <div className="flex flex-row items-center gap-2">
+            <h1 className="text-black font-semibold text-xl">TaskFlow</h1>
+            <img src="/logo.svg" alt="" className="w-6" />
+          </div>
+        </div>
       </div>
 
       {/* MOBILE SIDEBAR OVERLAY */}
@@ -218,10 +224,16 @@ export default function DashboardLayout({ children }) {
       </aside>
 
       {/* MAIN CONTENT */}
+      {/* DESKTOP MAIN CONTENT */}
       <main
-        className="flex-1 p-3 overflow-auto"
+        className="hidden md:block flex-1 p-3 overflow-auto"
         style={{ marginLeft: `${width}px` }}
       >
+        {children}
+      </main>
+
+      {/* MOBILE MAIN CONTENT */}
+      <main className="block md:hidden flex-1 p-3 overflow-auto pt-16">
         {children}
       </main>
     </div>

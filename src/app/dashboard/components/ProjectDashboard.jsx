@@ -4,7 +4,10 @@ import ProgressBar from "./ProgressBar";
 export default function ProjectDashboard() {
   return (
     <div className="bg-white flex flex-col gap-2 p-2 rounded-xl">
-      <h1 className="font-semibold text-gray-900">Active Projects</h1>
+      <div className="flex flex-row justify-between">
+        <h1 className="font-semibold text-gray-900">Active Projects</h1>
+        <h2 className="px-3 text-blue-500">See All</h2>
+      </div>
       {/* SATU  */}
       <div className="bg-blue-50 flex flex-col gap-4 rounded-xl p-3 border-l-3 border-green-500">
         <div className="flex flex-row justify-between items-center">
@@ -14,7 +17,7 @@ export default function ProjectDashboard() {
             </h1>
             <p className="text-sm text-gray-400">Office Manager</p>
           </div>
-          <p className="text-green-500 text-sm bg-green-200 px-3 rounded-2xl">
+          <p className="text-green-500 text-xs md:text-sm bg-green-200 px-3 rounded-2xl">
             Completed
           </p>
         </div>
@@ -35,7 +38,7 @@ export default function ProjectDashboard() {
             </h1>
             <p className="text-sm text-gray-400">Office Manager</p>
           </div>
-          <p className="text-blue-500 text-sm bg-blue-200 px-3 rounded-2xl">
+          <p className="text-blue-500 text-xs md:text-sm bg-blue-200 px-3 rounded-2xl">
             In Progress
           </p>
         </div>
@@ -56,7 +59,7 @@ export default function ProjectDashboard() {
             </h1>
             <p className="text-sm text-gray-400">Office Manager</p>
           </div>
-          <p className="text-red-500 text-sm bg-red-200 px-3 rounded-2xl">
+          <p className="text-red-500 text-xs md:text-sm bg-red-200 px-3 rounded-2xl">
             Not Started
           </p>
         </div>

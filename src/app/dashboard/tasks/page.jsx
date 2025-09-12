@@ -1,10 +1,14 @@
 import DashboardLayout from "@/components/DashboardLayout";
+import NavbarTask from "./components/NavbarTask";
+import HeroTask from "./components/HeroTask";
+import ItemTask from "./components/ItemAllTasks";
 
 export default function TasksPage() {
   return (
     <DashboardLayout>
-      <h1 className="text-2xl font-bold mb-4">Tasks</h1>
-      <p className="text-gray-600">Here are your tasks...</p>
+      <HeroTask />
+      <NavbarTask />
+      <ItemTask />
     </DashboardLayout>
   );
 }
