@@ -14,10 +14,45 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
+  id           String     @id @default(cuid())
+  email        String     @unique
   passwordHash String
   name         String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  tasks        YourTask[]
+}
+
+model YourTask {
+  id          String    @id @default(cuid())
+  id_user     String
+  nameTasks   String
+  typeTasks   TypeTasks
+  dueDateTime DateTime
+  priority    Priority
+  descritpion String
+  createdAt   DateTime  @default(now())
+  updateAt    DateTime  @updatedAt
+  user        User      @relation(fields: [id_user], references: [id])
+}
+
+enum TypeTasks {
+  PRODUCT_DESIGN
+  CONTENT_WRITER
+  PROJECT_MANAJER
+  GOAL_TRECKER
+  MEETING_AGENDA
+  EVENT_PLANNING
+  CONTENT_CALENDAR
+  BUG_TRACKING
+  WEEKLY_DAYLY
+  DEVELOPMENT_WORKFLOW
+  CLASS_PLANNING
+  OFFICE_MANAGER
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
 }

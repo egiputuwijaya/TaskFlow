@@ -6,10 +6,12 @@ import { RiTeamLine, RiRobot3Line, RiAccountCircleLine } from "react-icons/ri";
 import { LuFootprints } from "react-icons/lu";
 import { BsClockHistory } from "react-icons/bs";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function DashboardLayout({ children }) {
   const [width, setWidth] = useState(240);
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const handleResize = (e) => {
     const newWidth = e.clientX;
@@ -47,8 +49,14 @@ export default function DashboardLayout({ children }) {
                 <h1 className="italic text-[12px] text-gray-500">OVERVIEW</h1>
 
                 <div className="px-3">
-                  <Link href="">
-                    <div className="flex flex-row gap-3 items-center">
+                  <Link href="/dashboard">
+                    <div
+                      className={`flex flex-row gap-3 items-center ${
+                        pathname === "/dashboard"
+                          ? "bg-blue-500 px-2 py-1 text-white border rounded-xl"
+                          : ""
+                      }`}
+                    >
                       <TbSmartHome className="text-md" />
                       <h2 className="">Dashboard</h2>
                     </div>
@@ -59,7 +67,16 @@ export default function DashboardLayout({ children }) {
               <div className="flex flex-col gap-1">
                 <h1 className="italic text-[12px] text-gray-500">TASKS</h1>
                 <div className="flex flex-col gap-2 px-3">
-                  <Link href="">
+                  <Link
+                    href="/dashboard/tasks"
+                    className={`${
+                      pathname === "/dashboard/tasks" ||
+                      pathname === "/dashboard/tasks/status" ||
+                      pathname === "/dashboard/tasks/calendar"
+                        ? "bg-blue-500 px-2 py-1 text-white border rounded-xl"
+                        : ""
+                    }`}
+                  >
                     <div className="flex flex-row gap-3 items-center ">
                       <FaTasks className="text-md" />
                       <h2 className="">Your Task</h2>

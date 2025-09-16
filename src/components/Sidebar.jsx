@@ -1,3 +1,4 @@
+"use client"
 export default function Sidebar() {
   const menuItems = [
     { name: "Overview", path: "/dashboard" },
