@@ -1,53 +1,109 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function ItemAllTasks() {
-  const [tasks, setTasks] = useState([
-    {
-      name: "",
-      type: "",
-      dueDate: "",
-      timeDue: "",
-      priority: "",
-      status: "",
+  const [tasks, setTasks] = useState([]);
+
+  // Ambil semua task user login
+  useEffect(() => {
+    async function fetchTasks() {
+      try {
+        const res = await fetch("/api/tasks", {
+          credentials: "include",
+        });
+        if (!res.ok) {
+          console.error("Gagal fetch tasks:", await res.text());
+          return;
+        }
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setTasks(data);
+        } else {
+          setTasks([]);
+        }
+      } catch (err) {
+        console.error("Error fetch tasks:", err);
+      }
+    }
+    fetchTasks();
+  }, []);
+
+  // Tambah task baru
+  const handleTambah = async () => {
+    const newTask = {
+      nameTasks: "New Task",
+      typeTasks: "DEVELOPMENT_WORKFLOW", // sesuai enum Prisma
+      dueDateTime: new Date().toISOString(),
+      priority: "LOW",
       description: "",
-      checked: false,
-    },
-  ]);
+    };
 
-  const handleChange = (index, e) => {
+    try {
+      const res = await fetch("/api/tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(newTask),
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error("❌ Tambah task gagal:", errorText);
+        return;
+      }
+
+      const created = await res.json();
+      setTasks((prev) => [...prev, created]);
+    } catch (err) {
+      console.error("🔥 Error fetch:", err);
+    }
+  };
+
+  // Update task
+  const handleChange = async (index, e) => {
     const { name, value } = e.target;
-    const newTasks = [...tasks];
-    newTasks[index][name] = value;
-    setTasks(newTasks);
+    const updatedTasks = [...tasks];
+
+    if (name === "dueDateTime") {
+      updatedTasks[index][name] = new Date(value + "T00:00:00").toISOString();
+    } else {
+      updatedTasks[index][name] = value;
+    }
+
+    setTasks(updatedTasks);
+
+    const taskId = updatedTasks[index].id;
+    if (taskId) {
+      const res = await fetch(`/api/tasks/${taskId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedTasks[index]),
+      });
+
+      if (!res.ok) {
+        console.error("❌ Update task gagal:", await res.text());
+      }
+    }
   };
 
-  const handleTambah = () => {
-    setTasks([
-      ...tasks,
-      {
-        name: "",
-        type: "",
-        dueDate: "",
-        timeDue: "",
-        priority: "",
-        status: "",
-        description: "",
-        checked: false,
-      },
-    ]);
+  // Hapus task yang dicentang
+  const deleteChecked = async () => {
+    const toDelete = tasks.filter((task) => task.checked);
+    for (const task of toDelete) {
+      if (task.id) {
+        await fetch(`/api/tasks/${task.id}`, { method: "DELETE" });
+      }
+    }
+    setTasks(tasks.filter((task) => !task.checked));
   };
 
+  // Toggle checkbox
   const toggleCheck = (index) => {
     const newTasks = [...tasks];
     newTasks[index].checked = !newTasks[index].checked;
     setTasks(newTasks);
-  };
-
-  const deleteChecked = () => {
-    setTasks(tasks.filter((task) => !task.checked));
   };
 
   return (
@@ -60,21 +116,18 @@ export default function ItemAllTasks() {
             <th className="px-4 py-2">Task Name</th>
             <th className="px-4 py-2">Type Task</th>
             <th className="px-4 py-2">Due Date</th>
-            <th className="px-4 py-2">Time Due</th>
             <th className="px-4 py-2">Priority</th>
-            <th className="px-4 py-2">Status</th>
             <th className="px-4 py-2">Description</th>
           </tr>
         </thead>
-
         <tbody>
           {tasks.map((task, index) => (
-            <tr key={index} className=" border-gray-300 group">
+            <tr key={task.id || index} className="border-gray-300 group">
               <td className="text-center">
                 {task.checked && (
                   <button
                     onClick={deleteChecked}
-                    className=" px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 flex flex-row items-center gap-2"
+                    className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 flex flex-row items-center gap-2"
                   >
                     <FaRegTrashAlt className="text-white" />
                   </button>
@@ -83,50 +136,59 @@ export default function ItemAllTasks() {
               <td className="text-center">
                 <input
                   type="checkbox"
-                  checked={task.checked}
+                  checked={task.checked || false}
                   onChange={() => toggleCheck(index)}
                   className={`w-5 h-5 text-blue-600 border-gray-300 rounded 
-      ${task.checked ? "inline-block" : "hidden group-hover:inline-block"} 
-      transition-all`}
+                    ${
+                      task.checked
+                        ? "inline-block"
+                        : "hidden group-hover:inline-block"
+                    } 
+                    transition-all`}
                 />
               </td>
-
               <td className="border-y border-gray-300">
                 <input
                   type="text"
-                  name="name"
-                  value={task.name}
+                  name="nameTasks"
+                  value={task.nameTasks || ""}
                   onChange={(e) => handleChange(index, e)}
                   className="w-full h-full focus:outline-none rounded-none"
                 />
               </td>
               <td className="border border-gray-300 px-3 py-2">
                 <select
-                  name="type"
-                  value={task.type}
+                  name="typeTasks"
+                  value={task.typeTasks || ""}
                   onChange={(e) => handleChange(index, e)}
-                  className="w-full h-full focus:outline-none rounded-none appearance-none border-none px-5"
+                  className="w-full h-full focus:outline-none rounded-none border-none px-2"
                 >
-                  <option value="">Select Type</option>
-                  <option value="development">Development</option>
-                  <option value="design">Design</option>
-                  <option value="testing">Testing</option>
+                  {/* ✅ enum sesuai Prisma */}
+                  <option value="PRODUCT_DESIGN">Product Design</option>
+                  <option value="CONTENT_WRITER">Content Writer</option>
+                  <option value="PROJECT_MANAJER">Project Manager</option>
+                  <option value="GOAL_TRECKER">Goal Tracker</option>
+                  <option value="MEETING_AGENDA">Meeting Agenda</option>
+                  <option value="EVENT_PLANNING">Event Planning</option>
+                  <option value="CONTENT_CALENDAR">Content Calendar</option>
+                  <option value="BUG_TRACKING">Bug Tracking</option>
+                  <option value="WEEKLY_DAYLY">Weekly/Daily</option>
+                  <option value="DEVELOPMENT_WORKFLOW">
+                    Development Workflow
+                  </option>
+                  <option value="CLASS_PLANNING">Class Planning</option>
+                  <option value="OFFICE_MANAGER">Office Manager</option>
                 </select>
               </td>
               <td className="border border-gray-300 px-3 py-2">
                 <input
                   type="date"
-                  name="dueDate"
-                  value={task.dueDate}
-                  onChange={(e) => handleChange(index, e)}
-                  className="w-full h-full focus:outline-none rounded-none appearance:none"
-                />
-              </td>
-              <td className="border border-gray-300 px-3 py-2">
-                <input
-                  type="time"
-                  name="timeDue"
-                  value={task.timeDue}
+                  name="dueDateTime"
+                  value={
+                    task.dueDateTime
+                      ? new Date(task.dueDateTime).toISOString().split("T")[0]
+                      : ""
+                  }
                   onChange={(e) => handleChange(index, e)}
                   className="w-full h-full focus:outline-none rounded-none"
                 />
@@ -134,32 +196,20 @@ export default function ItemAllTasks() {
               <td className="border border-gray-300 px-3 py-2">
                 <select
                   name="priority"
-                  value={task.priority}
+                  value={task.priority || "LOW"}
                   onChange={(e) => handleChange(index, e)}
-                  className="w-full h-full focus:outline-none rounded-none appearance-none px-5"
+                  className="w-full h-full focus:outline-none rounded-none border-none px-2"
                 >
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                </select>
-              </td>
-              <td className="border border-gray-300 px-3 py-2">
-                <select
-                  name="status"
-                  value={task.status}
-                  onChange={(e) => handleChange(index, e)}
-                  className="w-full h-full focus:outline-none rounded-none appearance-none px-5"
-                >
-                  <option value="not started">Not Started</option>
-                  <option value="in progress">In Progress</option>
-                  <option value="done">Done</option>
+                  <option value="LOW">Low</option>
+                  <option value="MEDIUM">Medium</option>
+                  <option value="HIGH">High</option>
                 </select>
               </td>
               <td className="border border-gray-300 px-3 py-2">
                 <input
                   type="text"
                   name="description"
-                  value={task.description}
+                  value={task.description || ""}
                   onChange={(e) => handleChange(index, e)}
                   placeholder="Description"
                   className="w-full h-full focus:outline-none rounded-none"
@@ -174,10 +224,6 @@ export default function ItemAllTasks() {
         <FiPlus />
         <button onClick={handleTambah}>Tugas Baru</button>
       </div>
-
-      <pre className="mt-4 bg-gray-100 p-3 rounded text-gray-500">
-        {JSON.stringify(tasks, null, 2)}
-      </pre>
     </div>
   );
 }

@@ -30,7 +30,7 @@ model YourTask {
   typeTasks   TypeTasks
   dueDateTime DateTime
   priority    Priority
-  descritpion String
+  description String
   createdAt   DateTime  @default(now())
   updateAt    DateTime  @updatedAt
   user        User      @relation(fields: [id_user], references: [id])
