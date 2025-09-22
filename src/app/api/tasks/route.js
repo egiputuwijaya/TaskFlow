@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// 🔹 Tambah Task
+//  Tambah Task
 export async function POST(req) {
   try {
     const token = req.cookies.get("token")?.value;
@@ -14,7 +14,14 @@ export async function POST(req) {
 
     const decoded = jwt.verify(token, JWT_SECRET);
     const body = await req.json();
-    const { nameTasks, typeTasks, dueDateTime, priority, description } = body;
+    const {
+      nameTasks,
+      typeTasks,
+      dueDateTime,
+      priority,
+      description,
+      statusTask,
+    } = body;
 
     const task = await prisma.yourTask.create({
       data: {
@@ -24,6 +31,7 @@ export async function POST(req) {
         dueDateTime: new Date(dueDateTime),
         priority,
         description,
+        statusTask,
       },
     });
 
@@ -34,7 +42,7 @@ export async function POST(req) {
   }
 }
 
-// 🔹 Ambil semua task user login
+// Ambil semua task user login
 export async function GET(req) {
   try {
     const token = req.cookies.get("token")?.value;
@@ -48,7 +56,6 @@ export async function GET(req) {
       where: { id_user: decoded.id },
       orderBy: { createdAt: "desc" },
     });
-
     return NextResponse.json(tasks, { status: 200 });
   } catch (error) {
     console.error(error);

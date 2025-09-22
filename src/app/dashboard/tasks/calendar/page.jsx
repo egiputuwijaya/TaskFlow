@@ -1,18 +1,29 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./calendar.css"; // custom css tambahan
+import "./calendar.css";
 
 export default function TaskCalendar() {
-  const [tasks] = useState([
-    { name: "Design Homepage", dueDate: "2025-09-14", priority: "high" },
-    { name: "API Development", dueDate: "2025-09-14", priority: "medium" },
-    { name: "Testing Module", dueDate: "2025-09-18", priority: "low" },
-  ]);
-
+  const [tasks, setTasks] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
 
+  // Fetch tasks dari DB
+  useEffect(() => {
+    async function fetchTasks() {
+      try {
+        const res = await fetch("/api/tasks", { credentials: "include" });
+        if (!res.ok) throw new Error("Gagal fetch tasks");
+        const data = await res.json();
+        setTasks(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error("🔥 Error fetch tasks:", err);
+      }
+    }
+    fetchTasks();
+  }, []);
+
+  // Format tanggal yyyy-mm-dd
   const formatDate = (date) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -20,17 +31,21 @@ export default function TaskCalendar() {
     return `${year}-${month}-${day}`;
   };
 
+  // Filter tasks sesuai tanggal terpilih
   const tasksOnDate = selectedDate
-    ? tasks.filter((task) => task.dueDate === formatDate(selectedDate))
+    ? tasks.filter((task) =>
+        task.dueDateTime?.startsWith(formatDate(selectedDate))
+      )
     : [];
 
+  // Warna priority
   const getPriorityColor = (priority) => {
     switch (priority) {
-      case "high":
+      case "HIGH":
         return "bg-red-500";
-      case "medium":
+      case "MEDIUM":
         return "bg-yellow-400";
-      case "low":
+      case "LOW":
         return "bg-green-500";
       default:
         return "bg-blue-500";
@@ -38,20 +53,20 @@ export default function TaskCalendar() {
   };
 
   return (
-    <div className="relative h-screen w-full flex bg-gray-50 overflow-x-hidden">
-      {/* Kalender fullscreen */}
+    <div className="relative h-screen w-full flex bg-gray-50">
+      {/* Kalender */}
       <div className="flex-1 flex justify-center items-center p-2 md:p-6">
         <Calendar
-          locale="en-US" // Minggu di kiri
+          locale="en-US"
           calendarType="gregory"
           onClickDay={(date) => setSelectedDate(date)}
           tileContent={({ date }) => {
-            const todayTasks = tasks.filter(
-              (task) => task.dueDate === formatDate(date)
+            const todayTasks = tasks.filter((task) =>
+              task.dueDateTime?.startsWith(formatDate(date))
             );
             return todayTasks.length > 0 ? (
               <div className="flex justify-center items-center mt-1 gap-1">
-                {todayTasks.map((task, i) => (
+                {todayTasks.slice(0, 3).map((task, i) => (
                   <span
                     key={i}
                     className={`w-2 h-2 rounded-full ${getPriorityColor(
@@ -59,20 +74,25 @@ export default function TaskCalendar() {
                     )}`}
                   ></span>
                 ))}
+                {todayTasks.length > 3 && (
+                  <span className="text-xs text-gray-500">
+                    +{todayTasks.length - 3}
+                  </span>
+                )}
               </div>
             ) : null;
           }}
           tileClassName={({ date }) => {
             const day = date.getDay();
-            if (day === 0) return "text-red-500 font-bold"; // Minggu merah
-            if (day === 6) return "text-gray-500"; // Sabtu abu-abu
+            if (day === 0) return "text-red-500 font-bold"; // Minggu
+            if (day === 6) return "text-gray-500"; // Sabtu
             return "text-gray-800";
           }}
           className="custom-calendar w-full max-w-full h-full rounded-2xl shadow-lg bg-white p-4"
         />
       </div>
 
-      {/* Sidebar Modal (Desktop) */}
+      {/* Sidebar (Desktop) */}
       {selectedDate && (
         <>
           <div className="hidden md:block fixed top-0 right-0 h-full w-96 bg-white shadow-2xl border-l p-5 z-50 animate-slideIn">
@@ -95,7 +115,9 @@ export default function TaskCalendar() {
                     key={i}
                     className="p-4 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 border hover:shadow-md transition"
                   >
-                    <p className="font-semibold text-gray-700">{task.name}</p>
+                    <p className="font-semibold text-gray-700">
+                      {task.nameTasks}
+                    </p>
                     <p className="text-sm text-gray-500">
                       Priority:{" "}
                       <span
@@ -135,7 +157,9 @@ export default function TaskCalendar() {
                     key={i}
                     className="p-3 rounded-lg bg-blue-50 border hover:bg-blue-100 transition"
                   >
-                    <p className="font-semibold text-gray-700">{task.name}</p>
+                    <p className="font-semibold text-gray-700">
+                      {task.nameTasks}
+                    </p>
                     <p className="text-sm text-gray-500">
                       Priority:{" "}
                       <span

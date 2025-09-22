@@ -82,7 +82,14 @@ export default function DashboardLayout({ children }) {
                       <h2 className="">Your Task</h2>
                     </div>
                   </Link>
-                  <Link href="">
+                  <Link
+                    href="/dashboard/taskflowAI"
+                    className={`${
+                      pathname === "/dashboard/taskflowAI"
+                        ? "bg-blue-500 px-2 py-1 text-white border rounded-xl"
+                        : ""
+                    }`}
+                  >
                     <div className="flex flex-row gap-3 items-center">
                       <RiRobot3Line className="text-md" />
                       <h2 className="">TaskFlow AI</h2>

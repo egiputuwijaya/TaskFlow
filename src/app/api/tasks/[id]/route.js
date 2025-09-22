@@ -4,8 +4,10 @@ import prisma from "@/lib/prisma";
 // GET satu task by ID
 export async function GET(req, { params }) {
   try {
+    const { id } = params; // ✅ langsung ambil id
+
     const task = await prisma.yourTask.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!task) {
@@ -25,16 +27,20 @@ export async function GET(req, { params }) {
 // UPDATE task by ID
 export async function PUT(req, { params }) {
   try {
+    const { id } = params; // ✅ langsung ambil id
     const body = await req.json();
 
     const updatedTask = await prisma.yourTask.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         nameTasks: body.nameTasks,
         typeTasks: body.typeTasks,
-        dueDateTime: new Date(body.dueDateTime),
+        ...(body.dueDateTime
+          ? { dueDateTime: new Date(body.dueDateTime) }
+          : {}), // validasi Date
         priority: body.priority,
         description: body.description,
+        statusTask: body.statusTask,
       },
     });
 
@@ -51,8 +57,10 @@ export async function PUT(req, { params }) {
 // DELETE task by ID
 export async function DELETE(req, { params }) {
   try {
+    const { id } = params;
+
     await prisma.yourTask.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json(

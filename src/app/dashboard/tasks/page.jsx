@@ -37,6 +37,7 @@ export default function ItemAllTasks() {
       typeTasks: "DEVELOPMENT_WORKFLOW", // sesuai enum Prisma
       dueDateTime: new Date().toISOString(),
       priority: "LOW",
+      statusTask: "NOT_STARTED",
       description: "",
     };
 
@@ -117,6 +118,7 @@ export default function ItemAllTasks() {
             <th className="px-4 py-2">Type Task</th>
             <th className="px-4 py-2">Due Date</th>
             <th className="px-4 py-2">Priority</th>
+            <th className="px-4 py-2">Status</th>
             <th className="px-4 py-2">Description</th>
           </tr>
         </thead>
@@ -203,6 +205,18 @@ export default function ItemAllTasks() {
                   <option value="LOW">Low</option>
                   <option value="MEDIUM">Medium</option>
                   <option value="HIGH">High</option>
+                </select>
+              </td>
+              <td className="border border-gray-300 px-3 py-2">
+                <select
+                  name="statusTask"
+                  value={task.statusTask || "NOT_STARTED"}
+                  onChange={(e) => handleChange(index, e)}
+                  className="w-full h-full focus:outline-none rounded-none border-none px-2"
+                >
+                  <option value="NOT_STARTED">Not Started</option>
+                  <option value="IN_PROGRESS">In Progress</option>
+                  <option value="DONE">Done</option>
                 </select>
               </td>
               <td className="border border-gray-300 px-3 py-2">
