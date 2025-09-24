@@ -1,3 +1,14 @@
+import DashboardLayout from "@/components/DashboardLayout";
+import YourProfile from "./components/yourProfile";
+import YourTaskProfile from "./components/yourTaskProfile";
+
 export default function Account() {
-  return <div className="">HELLO WORLD</div>;
+  return (
+    <DashboardLayout>
+      <div className="flex flex-col gap-5">
+        <YourProfile />
+        <YourTaskProfile />
+      </div>
+    </DashboardLayout>
+  );
 }

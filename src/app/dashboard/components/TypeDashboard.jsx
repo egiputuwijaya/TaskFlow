@@ -12,7 +12,7 @@ import { MdDeveloperMode } from "react-icons/md";
 import { MdOutlineClass } from "react-icons/md";
 import { PiBuildingOfficeLight } from "react-icons/pi";
 
-export default function StatisticDashboard() {
+export default function TypeDashboard() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 my-4">
       <div className="bg-white flex flex-col gap-3 p-4 rounded-2xl">

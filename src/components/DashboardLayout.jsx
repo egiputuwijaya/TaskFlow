@@ -95,13 +95,14 @@ export default function DashboardLayout({ children }) {
                       <h2 className="">TaskFlow AI</h2>
                     </div>
                   </Link>
-                  <Link href="">
-                    <div className="flex flex-row gap-3 items-center">
-                      <LuFootprints className="text-md" />
-                      <h2 className="">TaskFlow Tracker</h2>
-                    </div>
-                  </Link>
-                  <Link href="">
+                  <Link
+                    href="/dashboard/colab"
+                    className={`${
+                      pathname === "/dashboard/colab"
+                        ? "bg-blue-500 px-2 py-1 text-white border rounded-xl"
+                        : ""
+                    }`}
+                  >
                     <div className="flex flex-row gap-3 items-center">
                       <RiTeamLine className="text-md" />
                       <h2 className="">TaskFlow Colab</h2>
@@ -113,13 +114,27 @@ export default function DashboardLayout({ children }) {
               <div className="flex flex-col gap-1">
                 <h1 className="italic text-[12px] text-gray-500">SETTINGS</h1>
                 <div className="flex flex-col gap-2 px-3">
-                  <Link href="">
+                  <Link
+                    href="/dashboard/account"
+                    className={`${
+                      pathname === "/dashboard/account"
+                        ? "bg-blue-500 px-2 py-1 text-white border rounded-xl"
+                        : ""
+                    }`}
+                  >
                     <div className="flex flex-row gap-3 items-center ">
                       <RiAccountCircleLine className="text-md" />
                       <h2 className="">Account</h2>
                     </div>
                   </Link>
-                  <Link href="">
+                  <Link
+                    href="/dashboard/history"
+                    className={`${
+                      pathname === "/dashboard/history"
+                        ? "bg-blue-500 px-2 py-1 text-white border rounded-xl"
+                        : ""
+                    }`}
+                  >
                     <div className="flex flex-row gap-3 items-center ">
                       <BsClockHistory className="text-md" />
                       <h2 className="">History</h2>

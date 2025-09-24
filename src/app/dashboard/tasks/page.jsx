@@ -34,7 +34,7 @@ export default function ItemAllTasks() {
   const handleTambah = async () => {
     const newTask = {
       nameTasks: "New Task",
-      typeTasks: "DEVELOPMENT_WORKFLOW", // sesuai enum Prisma
+      typeTasks: "DEVELOPMENT_WORKFLOW", 
       dueDateTime: new Date().toISOString(),
       priority: "LOW",
       statusTask: "NOT_STARTED",

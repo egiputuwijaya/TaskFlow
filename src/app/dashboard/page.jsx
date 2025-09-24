@@ -1,16 +1,18 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import HeroDashboard from "./components/HeroDashboard";
-import StatisticDashboard from "./components/StatisticDashboard";
 import ProjectDashboard from "./components/ProjectDashboard";
+import TypeDashboard from "./components/TypeDashboard";
+import StatisticDashboard from "./components/StatisticDasboard";
 
 export default function DashboardPage() {
   return (
     <DashboardLayout>
-      <div className="">
-        <HeroDashboard />
+      <HeroDashboard />
+      <div className="flex flex-row gap-5">
+        <TypeDashboard />
         <StatisticDashboard />
-        <ProjectDashboard />
       </div>
+      <ProjectDashboard />
     </DashboardLayout>
   );
 }
