@@ -6,7 +6,6 @@ export default function TaskFlowAI() {
   return (
     <DashboardLayout>
       <div className="flex flex-col gap-3">
-        <HeroAI />
         <ChatBox />
       </div>
     </DashboardLayout>

@@ -80,7 +80,11 @@ export default function ChatBox() {
                   : "bg-blue-500 text-white self-end"
               }`}
             >
-              {m.content}
+              {m.content.split("\n").map((line, index) => (
+                <p key={index} className="mb-1 leading-relaxed">
+                  {line}
+                </p>
+              ))}
             </div>
           </div>
         ))}

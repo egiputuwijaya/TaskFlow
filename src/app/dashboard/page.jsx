@@ -8,10 +8,15 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <HeroDashboard />
-      <div className="flex flex-row gap-5">
-        <TypeDashboard />
-        <StatisticDashboard />
+      <div className="w-full flex gap-5">
+        <div className="w-4/5">
+          <TypeDashboard />
+        </div>
+        <div className="w-1/5">
+          <StatisticDashboard />
+        </div>
       </div>
+
       <ProjectDashboard />
     </DashboardLayout>
   );

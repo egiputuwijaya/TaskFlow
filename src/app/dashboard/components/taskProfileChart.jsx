@@ -8,13 +8,13 @@ export default function TaskProfileChart({ value, color }) {
   ];
 
   return (
-    <PieChart width={180} height={180}>
+    <PieChart width={100} height={100}>
       <Pie
         data={data}
         cx="50%"
         cy="50%"
-        innerRadius={60}
-        outerRadius={80}
+        innerRadius={30}
+        outerRadius={40}
         startAngle={90}
         endAngle={-270}
         paddingAngle={2}
@@ -25,7 +25,7 @@ export default function TaskProfileChart({ value, color }) {
         {data.map((entry, index) => (
           <Cell
             key={`cell-${index}`}
-            fill={index === 0 ? color : "#e5e7eb"} // abu-abu untuk sisa
+            fill={index === 0 ? color : "#e5e7eb"} 
           />
         ))}
       </Pie>

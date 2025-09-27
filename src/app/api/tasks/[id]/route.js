@@ -57,14 +57,37 @@ export async function PUT(req, { params }) {
 // DELETE task by ID
 export async function DELETE(req, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
+    // cari task dulu
+    const task = await prisma.yourTask.findUnique({
+      where: { id },
+    });
+
+    if (!task) {
+      return NextResponse.json({ error: "Task not found" }, { status: 404 });
+    }
+
+    // simpan ke tabel History
+    await prisma.history.create({
+      data: {
+        id_user: task.id_user,
+        nameTasks: task.nameTasks,
+        typeTasks: task.typeTasks,
+        dueDateTime: task.dueDateTime,
+        priority: task.priority,
+        description: task.description,
+        statusTask: task.statusTask,
+      },
+    });
+
+    // hapus dari yourTask
     await prisma.yourTask.delete({
       where: { id },
     });
 
     return NextResponse.json(
-      { message: "Task deleted successfully" },
+      { message: "Task moved to history successfully" },
       { status: 200 }
     );
   } catch (error) {
