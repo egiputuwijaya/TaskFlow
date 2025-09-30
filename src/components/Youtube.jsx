@@ -6,20 +6,24 @@ export default function VideoYoutube() {
     >
       {/* Bagian SVG (ajakan menonton) */}
       <div className="mb-6">
-        <img src="/Youtube.svg" alt="Ayo tonton di Youtube" className="w-50 md:w-80" />
+        <img
+          src="/Youtube.svg"
+          alt="Ayo tonton di Youtube"
+          className="w-50 md:w-80"
+        />
       </div>
 
       {/* Bagian Video */}
       <div className="w-full max-w-5xl aspect-video">
         <iframe
-          width="1920"
-          height="1080"
-          src="https://www.youtube.com/embed/U8oagjVCpPo?si=4Wqy6Tje2rMaU_Kj"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/Es0NpdsFy3g?si=HznZMncyZaHtL0PK"
           title="YouTube video player"
-          frameBorder="0"
+          frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
           className="w-full h-full rounded-xl shadow-lg"
         ></iframe>
       </div>

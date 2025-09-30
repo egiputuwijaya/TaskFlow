@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import TaskProfileChart from "./taskProfileChart";
+import * as motion from "motion/react-client";
 
 export default function StatisticDashboard() {
   const [tasks, setTasks] = useState([]);
@@ -54,7 +55,13 @@ export default function StatisticDashboard() {
   }, [tasks]);
 
   return (
-    <div className="py-5">
+    <motion.div
+      initial={{ opacity: 0, x: 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.5 }}
+      className="py-5"
+    >
       <div className="bg-white rounded-xl py-3 px-10">
         <h1 className="text-blue-500 font-semibold">Your Statistic</h1>
         <div className="border border-blue-500"></div>
@@ -76,6 +83,6 @@ export default function StatisticDashboard() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

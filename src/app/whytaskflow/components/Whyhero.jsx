@@ -1,14 +1,21 @@
+import * as motion from "motion/react-client";
+
 export default function WhyHero() {
   return (
     <section className="relative bg-white py-20 px-6">
-      {/* Decorative gradient shapes */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-blue-200 rounded-full blur-3xl opacity-40"></div>
-      <div className="absolute bottom-10 right-10 w-48 h-48 bg-purple-300 rounded-full blur-3xl opacity-30"></div>
-
-      <div className="relative max-w-6xl mx-auto text-center space-y-12">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.9 }}
+        className="relative max-w-6xl mx-auto text-center space-y-12"
+      >
         {/* Title */}
         <h1 className="text-5xl font-extrabold text-gray-900 leading-tight">
-          Why Teams Trust <span className="bg-blue-600 px-2 text-white rounded-2xl">TaskFlow</span>
+          Why Teams Trust{" "}
+          <span className="bg-blue-600 px-2 text-white rounded-2xl">
+            TaskFlow
+          </span>
         </h1>
 
         {/* Subtitle */}
@@ -29,7 +36,7 @@ export default function WhyHero() {
             />
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

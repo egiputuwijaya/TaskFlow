@@ -13,6 +13,7 @@ import { MdDeveloperMode } from "react-icons/md";
 import { MdOutlineClass } from "react-icons/md";
 import { PiBuildingOfficeLight } from "react-icons/pi";
 import { useState, useEffect } from "react";
+import * as motion from "motion/react-client";
 
 export default function TypeDashboard() {
   const [tasks, setTasks] = useState([]);
@@ -109,8 +110,12 @@ export default function TypeDashboard() {
           (task) => task.typeTasks === type.name
         ).length;
         return (
-          <div
-            className="bg-white flex flex-col gap-3 p-4 rounded-2xl"
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.5 }}
+            className="bg-white flex flex-col gap-3 p-4 rounded-2xl hover:scale-105 hover:bg-blue-100 transition duration-200"
             key={index}
           >
             <div className="flex flex-row justify-between items-center">
@@ -124,7 +129,7 @@ export default function TypeDashboard() {
                 <h1 className="text-purple-400">+2%</h1>
               </div>
             </div>
-          </div>
+          </motion.div>
         );
       })}
     </div>

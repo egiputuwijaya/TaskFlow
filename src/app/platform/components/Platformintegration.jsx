@@ -1,12 +1,22 @@
 "use client";
+import * as motion from "motion/react-client";
 
 export default function PlatformIntegration() {
   return (
     <div className="bg-white">
-      <div className="flex flex-col gap-5 px-30 py-10">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.9 }}
+        className="flex flex-col gap-5 px-2 md:px-30 py-10"
+      >
         <div className="flex flex-col gap-2">
           <h1 className="text-center text-4xl font-semibold text-black">
-            Your favorite tools, <span className="text-white bg-blue-600 px-2 rounded">all in one flow</span>
+            Your favorite tools,{" "}
+            <span className="text-white bg-blue-600 md:px-2 rounded">
+              all in one flow
+            </span>
           </h1>
           <p className="text-center text-gray-700">
             TaskFlow doesn’t replace the tools you loveit makes them work
@@ -35,7 +45,7 @@ export default function PlatformIntegration() {
             <img src="/Integration8.svg" alt="" className="w-15 wave delay-7" />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Animasi hanya berlaku di halaman ini */}
       <style jsx>{`

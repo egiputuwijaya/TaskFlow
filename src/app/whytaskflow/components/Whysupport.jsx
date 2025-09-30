@@ -1,6 +1,6 @@
 export default function WhySupport() {
   return (
-    <div className="bg-white px-10 py-20">
+    <div className="bg-white px-10 py-20 hidden md:block">
       <h1 className="text-center text-4xl font-semibold text-blue-600 mb-16">
         The Pieces That Power It
       </h1>

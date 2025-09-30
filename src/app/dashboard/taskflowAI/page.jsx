@@ -1,6 +1,5 @@
-import ChatBox from "@/components/ChatBox";
+import ChatBox from "@/app/dashboard/taskflowAI/components/ChatBox";
 import DashboardLayout from "@/components/DashboardLayout";
-import HeroAI from "./components/HeroAI";
 
 export default function TaskFlowAI() {
   return (

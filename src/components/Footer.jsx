@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div className="py-10" style={{ backgroundColor: "#3B82F6" }}>
       <div className="px-3 md:px-30">
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between text-white">
           <div className="flex flex-col gap-3">
             <div className="flex flex-row items-center gap-3">
               <h1 className="text-xl font-semibold">TaskFlow</h1>
@@ -18,24 +18,27 @@ export default function Footer() {
               </p>
             </div>
             <div className="flex flex-row py-2 gap-5">
-              <FaXTwitter className="text-2xl" />
-              <FaInstagram className="text-2xl" />
-              <FaLinkedin className="text-2xl" />
-              <FaGithub className="text-2xl" />
+              <FaXTwitter className="text-2xl hover:text-gray-600" />
+              <FaInstagram className="text-2xl hover:text-gray-600" />
+              <FaLinkedin className="text-2xl hover:text-gray-600" />
+              <FaGithub className="text-2xl hover:text-gray-600" />
             </div>
           </div>
 
-          <div className="flex flex-row gap-15">
+          <div className="flex flex-row gap-15 text-white ">
             <div className="hidden md:block">
               <div className="flex flex-col gap-3">
                 <h2 className="font-semibold">MENU</h2>
-                <Link href="/whytaskflow" className="text-sm">
+                <Link
+                  href="/whytaskflow"
+                  className="text-sm hover:text-gray-600"
+                >
                   Why TaskFlow
                 </Link>
-                <Link href="/platform" className="text-sm">
+                <Link href="/platform" className="text-sm hover:text-gray-600">
                   Platform
                 </Link>
-                <Link href="/contact" className="text-sm">
+                <Link href="/contact" className="text-sm hover:text-gray-600">
                   Contact
                 </Link>
               </div>
@@ -43,26 +46,26 @@ export default function Footer() {
             <div className="hidden md:block">
               <div className="flex flex-col gap-3">
                 <h2 className="font-semibold">COMPANY</h2>
-                <Link href="" className="text-sm">
+                <Link href="" className="text-sm hover:text-gray-600">
                   About
                 </Link>
-                <Link href="" className="text-sm">
+                <Link href="" className="text-sm hover:text-gray-600">
                   Blog
                 </Link>
               </div>
             </div>
             <div className="flex flex-col gap-3">
               <h2 className="font-semibold">SUPPORT</h2>
-              <Link href="" className="text-sm">
+              <Link href="" className="text-sm hover:text-gray-600">
                 Help Center
               </Link>
-              <Link href="" className="text-sm">
+              <Link href="" className="text-sm hover:text-gray-600">
                 FAQs
               </Link>
-              <Link href="" className="text-sm">
+              <Link href="" className="text-sm hover:text-gray-600">
                 Privacy Policy
               </Link>
-              <Link href="" className="text-sm">
+              <Link href="" className="text-sm hover:text-gray-600">
                 Terms of Service
               </Link>
             </div>

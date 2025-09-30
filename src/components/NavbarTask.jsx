@@ -8,11 +8,11 @@ import { usePathname } from "next/navigation";
 export default function NavbarTask() {
   const pathname = usePathname();
   return (
-    <div className="flex flex-row justify-between px-5">
-      <div className="flex flex-row gap-10">
+    <div className="flex flex-row justify-between px-2 md:px-5">
+      <div className="flex flex-row gap-4 md:gap-10">
         <Link
           href="/dashboard/tasks"
-          className={`flex flex-row gap-2 items-center px-3  ${
+          className={`flex flex-row gap-1 md:gap-2  items-center px-2 md:px-3  ${
             pathname === "/dashboard/tasks"
               ? "border-2 rounded-2xl border-blue-500 text-blue-500"
               : ""

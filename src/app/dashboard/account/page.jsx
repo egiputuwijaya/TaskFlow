@@ -1,6 +1,6 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import YourProfile from "./components/yourProfile";
-import YourTaskProfile from "./components/yourTaskProfile";
+import YourTaskProfile from "./components/yourStatisticTaskProfile";
 
 export default function Account() {
   return (

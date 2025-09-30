@@ -39,7 +39,7 @@ export default function Colab() {
           <button onClick={() => setIsOpen(true)}>Create your team</button>
         </div>
 
-        <h1 className="text-2xl text-gray-800 font-semibold">
+        <h1 className="text-2xl text-gray-800 font-semibold text-center">
           Empower your teammates with{" "}
           <span className="text-blue-500">TaskFlow</span>
         </h1>

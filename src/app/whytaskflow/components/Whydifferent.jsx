@@ -1,4 +1,5 @@
 import { FaCheckCircle, FaRegTimesCircle } from "react-icons/fa";
+import * as motion from "motion/react-client";
 export default function WhyDifferent() {
   const TaskFlow = [
     {
@@ -24,42 +25,47 @@ export default function WhyDifferent() {
     },
   ];
   return (
-    <div className="bg-white px-30">
-      <h1 className="text-center text-black text-4xl font-semibold py-10">
-        What Makes{" "}
-        <span className="text-white bg-blue-600 px-2 rounded">TaskFlow</span>{" "}
-        Different
-      </h1>
-      <div className="flex flex-row gap-20">
-        <div
-          className="flex flex-col px-5 rounded-b-2xl py-3"
-          style={{ backgroundColor: "#3B82F6" }}
-        >
-          <h1 className="text-white font-semibold text-2xl py-2">TaskFlow</h1>
-          {TaskFlow.map((task, index) => (
-            <div
-              className="flex flex-row items-center gap-3 bg-white\"
-              key={index}
-            >
-              <FaCheckCircle className="text-6xl text-green-500" />
-              <p className="text-sm">{task.text}</p>
-            </div>
-          ))}
-        </div>
+    <div className="bg-white px-2 md:px-30">
+      <motion.div
+        className=""
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.9 }}
+      >
+        <h1 className="text-center text-black text-4xl font-semibold py-10">
+          What Makes{" "}
+          <span className="text-white bg-blue-600 px-2 rounded">TaskFlow</span>{" "}
+          Different
+        </h1>
+        <div className="flex flex-col md:flex-row gap-5 md:gap-20">
+          <div
+            className="flex flex-col px-5 rounded-b-2xl py-3 hover:scale-95 transition"
+            style={{ backgroundColor: "#3B82F6" }}
+          >
+            <h1 className="text-white font-semibold text-2xl py-2">TaskFlow</h1>
+            {TaskFlow.map((task, index) => (
+              <div className="flex flex-row items-center gap-3 " key={index}>
+                <FaCheckCircle className="text-6xl text-green-500" />
+                <p className="text-sm">{task.text}</p>
+              </div>
+            ))}
+          </div>
 
-        <div
-          className="flex flex-col px-5 rounded-b-2xl py-3"
-          style={{ backgroundColor: "#3B82F6" }}
-        >
-          <h1 className="text-white font-semibold text-2xl py-2">Other</h1>
-          {Other.map((task, index) => (
-            <div className="flex flex-row items-center gap-3" key={index}>
-              <FaRegTimesCircle className="text-6xl text-red-500" />
-              <p className="text-sm">{task.text}</p>
-            </div>
-          ))}
+          <div
+            className="flex flex-col px-5 rounded-b-2xl py-3 hover:scale-95 transition"
+            style={{ backgroundColor: "#3B82F6" }}
+          >
+            <h1 className="text-white font-semibold text-2xl py-2">Other</h1>
+            {Other.map((task, index) => (
+              <div className="flex flex-row items-center gap-3" key={index}>
+                <FaRegTimesCircle className="text-6xl text-red-500" />
+                <p className="text-sm">{task.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

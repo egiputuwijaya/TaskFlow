@@ -33,7 +33,7 @@ export default function Navbar() {
               Log in
             </Link>
             <div
-              className="px-5 py-2 rounded-xl"
+              className="text-white px-5 py-2 rounded-xl"
               style={{ backgroundColor: "#3B82F6" }}
             >
               <Link href="/register" className="font-semibold ">

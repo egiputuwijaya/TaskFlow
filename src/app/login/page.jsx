@@ -43,7 +43,7 @@ export default function Login() {
 
         <div className="w-full max-w-md">
           <div className="mb-8 text-center">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 pt-8 md:pt-0">
               Welcome Back
             </h1>
             <p className="mt-2 text-gray-500 text-sm sm:text-base">
@@ -120,7 +120,7 @@ export default function Login() {
             Log in to access your CRM dashboard and manage your team.
           </p>
           <img
-            src="/login.svg"
+            src="/Login.svg"
             alt="dashboard preview"
             className="w-full max-w-md mx-auto"
           />

@@ -125,7 +125,7 @@ export default function Register() {
             Log in to access your CRM dashboard and manage your team.
           </p>
           <img
-            src="/login.svg"
+            src="/Login.svg"
             alt="dashboard preview"
             className="w-full max-w-md mx-auto"
           />

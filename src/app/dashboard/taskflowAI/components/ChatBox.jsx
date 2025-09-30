@@ -45,7 +45,7 @@ export default function ChatBox() {
           <h1>Welcome, {userName ? userName.name : "Loading..."} 👋</h1>
         </div>
 
-        <p className="text-5xl font-semibold ">How can I help you today?</p>
+        <p className="text-5xl font-semibold text-center">How can I help you today?</p>
 
         <div className="flex space-x-2 mt-5">
           {[0, 0.2, 0.4, 0.6].map((delay, index) => (

@@ -55,7 +55,7 @@ export default function Hero() {
         <div className="flex justify-center">
           <a
             href=""
-            className="px-5 py-3 border-2 border-white rounded-xl font-semibold text-white"
+            className="px-5 py-3 border-2 border-white rounded-xl font-semibold text-white hover:border-blue-500 hover:text-blue-500 transition duration-300"
           >
             Add Your First Task
           </a>

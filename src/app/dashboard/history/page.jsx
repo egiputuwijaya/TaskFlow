@@ -108,19 +108,71 @@ export default function History() {
                       </div>
                       <div>
                         <p className="font-semibold">Type Task</p>
-                        <p>{item.typeTasks}</p>
+                        <p className="text-sm text-gray-400">
+                          {item.typeTasks === "PRODUCT_DESIGN"
+                            ? "Product Design"
+                            : item.typeTasks === "CONTENT_WRITER"
+                            ? "Content Writer"
+                            : item.typeTasks === "PROJECT_MANAJER"
+                            ? "Project Manajer"
+                            : item.typeTasks === "GOAL_TRECKER"
+                            ? "Goal Tracker"
+                            : item.typeTasks === "MEETING_AGENDA"
+                            ? "Meeting Agenda"
+                            : item.typeTasks === "EVENT_PLANNING"
+                            ? "Event Planning"
+                            : item.typeTasks === "CONTENT_CALENDAR"
+                            ? "Content Calendar"
+                            : item.typeTasks === "BUG_TRACKING"
+                            ? "Bug Tracking"
+                            : item.typeTasks === "WEEKLY_DAYLY"
+                            ? "Weekly Daily"
+                            : item.typeTasks === "DEVELOPMENT_WORKFLOW"
+                            ? "Development Workflow"
+                            : item.typeTasks === "CLASS_PLANNING"
+                            ? "Class Planning"
+                            : item.typeTasks === "OFFICE_MANAGER"
+                            ? "Office Manager"
+                            : ""}
+                        </p>
                       </div>
                       <div>
                         <p className="font-semibold">Due Date</p>
-                        <p>{item.dueDateTime}</p>
+                        <p>
+                          {new Date(item.dueDateTime).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "2-digit",
+                            }
+                          )}
+                        </p>
                       </div>
                       <div>
                         <p className="font-semibold">Priority</p>
-                        <p>{item.priority}</p>
+                        <p>
+                          {" "}
+                          {item.priority === "LOW"
+                            ? "Low"
+                            : item.priority === "MEDIUM"
+                            ? "Medium"
+                            : item.priority === "HIGH"
+                            ? "High"
+                            : ""}
+                        </p>
                       </div>
                       <div>
                         <p className="font-semibold">Status</p>
-                        <p>{item.statusTask}</p>
+                        <p>
+                          {" "}
+                          {item.statusTask === "NOT_STARTED"
+                            ? "Not Started"
+                            : item.statusTask === "IN_PROGRESS"
+                            ? "In Progress"
+                            : item.statusTask === "DONE"
+                            ? "Done"
+                            : ""}
+                        </p>
                       </div>
                       <div>
                         <p className="font-semibold">Description</p>

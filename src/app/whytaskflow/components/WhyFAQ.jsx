@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
+import * as motion from "motion/react-client";
 
 export default function WhyFAQ() {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -32,8 +33,14 @@ export default function WhyFAQ() {
   ];
 
   return (
-    <div className="bg-white py-20 px-30">
-      <div className="max-w-6xl mx-auto">
+    <div className="bg-white py-20 px-2 md:px-30">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.9 }}
+        className="max-w-6xl mx-auto"
+      >
         <h2 className="text-center text-4xl font-bold text-gray-900">
           Frequently Asked Questions
         </h2>
@@ -46,7 +53,7 @@ export default function WhyFAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className={`border rounded-xl p-4 shadow-sm transition bg-white ${
+              className={`border rounded-xl p-4 shadow-sm transition bg-white hover:bg-gray-100 ${
                 activeIndex === index
                   ? "border-blue-500 shadow-md"
                   : "border-gray-200"
@@ -74,7 +81,7 @@ export default function WhyFAQ() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
